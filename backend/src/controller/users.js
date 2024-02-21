@@ -38,7 +38,8 @@ export const signup = async (req, res) => {
       profileImage
     );
 
-    generateToken(username, res);
+    const token = generateToken(username, res);
+    console.log("TOKEN", token);
 
     res.status(201).json({ data: newUser });
   } catch (error) {
