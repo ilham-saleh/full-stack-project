@@ -1,9 +1,8 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
 import { createUserDB, findUserDB } from "../domain/users.js";
 
-const jwtSecret = process.env.JWT_SECRET;
+import generateToken from "../utils/generateToken.js";
 
 export const signup = async (req, res) => {
   const { fullName, username, password, confirmPassword, gender } = req.body;
@@ -38,6 +37,8 @@ export const signup = async (req, res) => {
       gender,
       profileImage
     );
+
+    generateToken(username, res);
 
     res.status(201).json({ data: newUser });
   } catch (error) {
