@@ -17,9 +17,9 @@ app.use(cors());
 app.use(express.json());
 const port = process.env.PORT || 8000;
 
-app.get("/", (req, res) => {
-  res.json("If you see this message server is working");
-});
+
+import userRouter from "./routes/users.js";
+app.use("/users", userRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);
