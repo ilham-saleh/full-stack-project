@@ -5,7 +5,7 @@ import sendDataResponse from "../utils/responses.js";
 
 const validateAuthentication = async (req, res, next) => {
   try {
-    const token = req.cookie.jwt;
+    const token = req.cookies.jwt;
 
     if (!token) {
       return sendDataResponse(res, 401, "Unauthorized: No token provided");
@@ -17,7 +17,7 @@ const validateAuthentication = async (req, res, next) => {
       return sendDataResponse(res, 401, "Unauthorized: Invalid token");
     }
 
-    const user = await findByIdDB(decoded.userId);
+    const user = await findUserDB(decoded.username);
     delete user.password;
 
     if (!user) {
