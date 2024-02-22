@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 
-import { createUserDB, findUserDB } from "../domain/users.js";
+import { createUserDB, findUserDB, getUsersDB } from "../domain/users.js";
 
 import generateToken from "../utils/generateToken.js";
 import sendDataResponse from "../utils/responses.js";
@@ -93,4 +93,9 @@ export const logout = async (req, res) => {
     console.log(error);
     return sendDataResponse(res, 500, "Internal server error");
   }
+};
+
+export const getUsers = async (req, res) => {
+  const users = await getUsersDB();
+  res.json({ data: users });
 };

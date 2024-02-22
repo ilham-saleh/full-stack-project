@@ -27,16 +27,20 @@ export const createUserDB = async (
 };
 
 export const findUserDB = async (username) => {
-    try {
-        const existingUser = await prisma.user.findUnique({
-            where: {
-                username: username
-            }
-        })
+  try {
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        username: username,
+      },
+    });
 
-        return existingUser
-    } catch (error) {
-        console.log("Error finding the USER:", error)
-        throw error
-    }
-}
+    return existingUser;
+  } catch (error) {
+    console.log("Error finding the USER:", error);
+    throw error;
+  }
+};
+
+export const getUsersDB = async () => {
+  return await prisma.user.findMany();
+};
