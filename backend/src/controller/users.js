@@ -3,24 +3,37 @@ import bcrypt from "bcrypt";
 import { createUserDB, findUserDB } from "../domain/users.js";
 
 import generateToken from "../utils/generateToken.js";
+import sendDataResponse from "../utils/responses.js";
 
 export const signup = async (req, res) => {
   const { fullName, username, password, confirmPassword, gender } = req.body;
 
+  const hasUppercase = /[A-Z]/.test(password);
+  const hasNumber = /\d/.test(password);
+  const hasSpecialChar = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(
+    password
+  );
+
   try {
     if (!fullName || !username || !password || !gender) {
-      return res
-        .status(406)
-        .json({ error: "Necessary fields required to fill in" });
+      return sendDataResponse(res, 406, "Necessary fields required to fill in");
     }
 
     if (password !== confirmPassword) {
-      return res.status(400).json({ error: "Passwords don't match" });
+      return sendDataResponse(res, 400, "Passwords don't match");
+    }
+
+    if (password.length < 6 || !hasUppercase || !hasNumber || !hasSpecialChar) {
+      return sendDataResponse(
+        res,
+        400,
+        "Password must be at least 6 characters and include uppercase letters, numbers, and special characters"
+      );
     }
 
     const existingUser = await findUserDB(username);
     if (existingUser) {
-      return res.status(400).json({ error: "Username already exists!" });
+      return sendDataResponse(res, 400, "Username already exists!");
     }
 
     const maleProfileImage = `https://avatar.iran.liara.run/public/boy?username=${username}`;
@@ -38,19 +51,38 @@ export const signup = async (req, res) => {
       profileImage
     );
 
-    const token = generateToken(username, res);
-    console.log("TOKEN", token);
+    generateToken(username, res);
 
     res.status(201).json({ data: newUser });
   } catch (error) {
-    res.status(500).json({ error });
+    console.log(error);
+    return sendDataResponse(res, 500, "Internal server error");
   }
 };
 
 export const login = async (req, res) => {
-  res.json({
-    message: "LOGIN CONTROLLER",
-  });
+  const { username, password } = req.body;
+
+  try {
+    const existingUser = await findUserDB(username);
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      existingUser.password || ""
+    );
+
+    if (!existingUser || !isPasswordCorrect) {
+      return sendDataResponse(res, 401, "Invalid username or password");
+    }
+
+    const token = generateToken(username, res);
+
+    delete existingUser.password;
+
+    res.json({ data: { ...existingUser, token } });
+  } catch (error) {
+    console.log(error);
+    return sendDataResponse(res, 500, "Internal server error");
+  }
 };
 
 export const logout = async (req, res) => {
