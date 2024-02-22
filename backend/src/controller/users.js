@@ -67,18 +67,18 @@ export const login = async (req, res) => {
     const existingUser = await findUserDB(username);
     const isPasswordCorrect = await bcrypt.compare(
       password,
-      existingUser.password || ""
+      existingUser?.password || ""
     );
 
     if (!existingUser || !isPasswordCorrect) {
       return sendDataResponse(res, 401, "Invalid username or password");
     }
 
-    const token = generateToken(username, res);
+    generateToken(username, res);
 
     delete existingUser.password;
 
-    res.json({ data: { ...existingUser, token } });
+    res.json({ data: existingUser });
   } catch (error) {
     console.log(error);
     return sendDataResponse(res, 500, "Internal server error");
@@ -86,7 +86,11 @@ export const login = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-  res.json({
-    message: "LOGOUT CONTROLLER",
-  });
+  try {
+    res.cookie("jwt", "", { maxAge: 0 });
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    console.log(error);
+    return sendDataResponse(res, 500, "Internal server error");
+  }
 };
