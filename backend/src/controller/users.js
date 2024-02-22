@@ -51,7 +51,7 @@ export const signup = async (req, res) => {
       profileImage
     );
 
-    generateToken(username, res);
+    generateToken(newUser.id, res);
 
     res.status(201).json({ data: newUser });
   } catch (error) {
@@ -74,7 +74,7 @@ export const login = async (req, res) => {
       return sendDataResponse(res, 401, "Invalid username or password");
     }
 
-    generateToken(username, res);
+    generateToken(existingUser.id, res);
 
     delete existingUser.password;
 
