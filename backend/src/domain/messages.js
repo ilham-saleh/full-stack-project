@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-export const createConversation = async (senderId, receiverId) => {
+export const createConversationDB = async (senderId, receiverId) => {
   const conversation = await prisma.conversation.create({
     data: {
       participants: {
@@ -13,7 +13,7 @@ export const createConversation = async (senderId, receiverId) => {
   return conversation;
 };
 
-export const getConversations = async (senderId) => {
+export const getConversationsDB = async (senderId) => {
   try {
     const userWithConversation = await prisma.user.findUnique({
       where: { id: Number(senderId) },
@@ -34,7 +34,7 @@ export const getConversations = async (senderId) => {
   }
 };
 
-export const createMessage = async (
+export const createMessageDB = async (
   text,
   senderId,
   receiverId,

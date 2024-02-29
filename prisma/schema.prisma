@@ -44,7 +44,7 @@ model Message {
 model Conversation {
   id             Int          @id @default(autoincrement())
   participants   User[]       @relation("userConversations")
-  messages       Message[]
+  messages       Message[]    
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @default(now()) @updatedAt
 }
