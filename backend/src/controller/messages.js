@@ -47,8 +47,6 @@ export const sendMessage = async (req, res) => {
       targetConversation.messages.push(newMessage);
     }
 
-    console.log(targetConversation.messages);
-
     res.json({ data: newMessage });
   } catch (error) {
     console.log(error);
@@ -80,7 +78,7 @@ export const getMessage = async (req, res) => {
 
     const messages = targetConversation.messages || [];
 
-    res.status(200).json({ messages });
+    res.status(200).json({ data: messages });
   } catch (error) {
     console.log(error);
     return sendDataResponse(res, 500, "Internal server error");
@@ -95,11 +93,11 @@ export const deleteMessage = async (req, res) => {
 
     if (deletedMessage) {
       return res.json({
-        success: true,
+        status: "Success",
         message: "Message deleted successfully.",
       });
     } else {
-      return res.json({ success: false, message: "Message not found." });
+      return sendDataResponse(res, 404, "Message not found");
     }
   } catch (error) {
     console.log(error);
@@ -115,14 +113,11 @@ export const deleteConversation = async (req, res) => {
 
     if (deletedConversation) {
       return res.json({
-        success: true,
+        status: "Success",
         message: `Conversation with ID ${conversationId} deleted successfully.`,
       });
     } else {
-      return res.json({
-        success: false,
-        message: "Conversation not found in Controller.",
-      });
+      return sendDataResponse(res, 404, "Conversation not found");
     }
   } catch (error) {
     console.log(error);

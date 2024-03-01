@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-import { findByIdDB, findUserDB } from "../domain/users.js";
+import { getUserByIdDB, findUserDB } from "../domain/users.js";
 import sendDataResponse from "../utils/responses.js";
 
 const validateAuthentication = async (req, res, next) => {
@@ -17,7 +17,7 @@ const validateAuthentication = async (req, res, next) => {
       return sendDataResponse(res, 401, "Unauthorized: Invalid token");
     }
 
-    const user = await findUserDB(decoded.username);
+    const user = await getUserByIdDB(decoded.username);
     delete user.password;
 
     if (!user) {

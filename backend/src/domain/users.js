@@ -41,7 +41,7 @@ export const findUserDB = async (username) => {
   }
 };
 
-export const findByIdDB = async (id) => {
+export const getUserByIdDB = async (id) => {
   const user = await prisma.user.findUnique({
     where: {
       id: Number(id),
