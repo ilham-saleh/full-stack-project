@@ -37,7 +37,7 @@ Before you begin, ensure you have met the following requirements:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/full-stack-chat-app.git
+   git clone git@github.com:ilham-saleh/full-stack-project.git
    ```
 
 ## Insatallation
@@ -51,10 +51,10 @@ Before you begin, ensure you have met the following requirements:
 
 3. Set up your environment variables:
 
-Create a .env file in the backend directory with the following content:
-DATABASE_URL="your_postgresql_database_url_here"
+Create a **.env** file in the backend directory with the following content:
+**DATABASE_URL="your_postgresql_database_url_here"**
 
-Replace "your_postgresql_database_url_here" with the actual URL of your PostgreSQL database.
+Replace **"your_postgresql_database_url_here"** with the actual URL of your PostgreSQL database.
 
 4. Migrate and seed the database:
    `cd backend`
