@@ -1,13 +1,14 @@
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/home";
+import Messages from "./pages/messages";
+
 function App() {
   return (
     <>
-      <button className="btn">Button</button>
-      <button className="btn btn-neutral">Neutral</button>
-      <button className="btn btn-primary">Primary</button>
-      <button className="btn btn-secondary">Secondary</button>
-      <button className="btn btn-accent">Accent</button>
-      <button className="btn btn-ghost">Ghost</button>
-      <button className="btn btn-link">Link</button>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/messages" element={<Messages />} />
+      </Routes>
     </>
   );
 }
