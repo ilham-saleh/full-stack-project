@@ -1,23 +1,13 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-
 function App() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3030/user")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data.users);
-        console.log(data.users);
-      });
-  }, []);
-
   return (
     <>
-      {data.map((data) => (
-        <p key={data.id}>{data.username}</p>
-      ))}
+      <button className="btn">Button</button>
+      <button className="btn btn-neutral">Neutral</button>
+      <button className="btn btn-primary">Primary</button>
+      <button className="btn btn-secondary">Secondary</button>
+      <button className="btn btn-accent">Accent</button>
+      <button className="btn btn-ghost">Ghost</button>
+      <button className="btn btn-link">Link</button>
     </>
   );
 }
