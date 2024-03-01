@@ -58,7 +58,7 @@ export const signup = async (req, res) => {
 
     generateToken(username, res);
 
-    res.status(201).json({ data: newUser });
+    res.status(201).json({ newUser });
   } catch (error) {
     console.log(error);
     return sendDataResponse(res, 500, "Internal server error");
@@ -83,7 +83,7 @@ export const login = async (req, res) => {
 
     delete existingUser.password;
 
-    res.json({ data: existingUser });
+    res.json({ user: existingUser });
   } catch (error) {
     console.log(error);
     return sendDataResponse(res, 500, "Internal server error");
@@ -102,7 +102,7 @@ export const logout = async (req, res) => {
 
 export const getUsers = async (req, res) => {
   const users = await getUsersDB();
-  res.json({ data: users });
+  res.json({ users });
 };
 
 export const getUserById = async (req, res) => {
@@ -111,7 +111,7 @@ export const getUserById = async (req, res) => {
 
     const user = await getUserByIdDB(userId);
 
-    res.json({ data: user });
+    res.json({ user });
   } catch (error) {
     console.log(error);
     return sendDataResponse(res, 500, "Internal server error");

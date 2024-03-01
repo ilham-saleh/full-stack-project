@@ -7,9 +7,9 @@ function App() {
   useEffect(() => {
     fetch("http://localhost:3030/user")
       .then((res) => res.json())
-      .then((result) => {
-        setData(result.data);
-        console.log(result.data);
+      .then((data) => {
+        setData(data.users);
+        console.log(data.users);
       });
   }, []);
 

@@ -47,7 +47,7 @@ export const sendMessage = async (req, res) => {
       targetConversation.messages.push(newMessage);
     }
 
-    res.json({ data: newMessage });
+    res.json({ newMessage });
   } catch (error) {
     console.log(error);
     return sendDataResponse(res, 500, "Internal server error");
@@ -78,7 +78,7 @@ export const getMessage = async (req, res) => {
 
     const messages = targetConversation.messages || [];
 
-    res.status(200).json({ data: messages });
+    res.status(200).json({ messages });
   } catch (error) {
     console.log(error);
     return sendDataResponse(res, 500, "Internal server error");
