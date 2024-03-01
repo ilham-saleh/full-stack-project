@@ -1,6 +1,8 @@
 import {
   createConversationDB,
   createMessageDB,
+  deleteMessageDB,
+  deleteConversationDB,
   getConversationsDB,
 } from "../domain/messages.js";
 import sendDataResponse from "../utils/responses.js";
@@ -79,6 +81,49 @@ export const getMessage = async (req, res) => {
     const messages = targetConversation.messages || [];
 
     res.status(200).json({ messages });
+  } catch (error) {
+    console.log(error);
+    return sendDataResponse(res, 500, "Internal server error");
+  }
+};
+
+export const deleteMessage = async (req, res) => {
+  const messageId = req.params.id;
+
+  try {
+    const deletedMessage = await deleteMessageDB(messageId);
+
+    if (deletedMessage) {
+      return res.json({
+        success: true,
+        message: "Message deleted successfully.",
+      });
+    } else {
+      return res.json({ success: false, message: "Message not found." });
+    }
+  } catch (error) {
+    console.log(error);
+    return sendDataResponse(res, 500, "Internal server error");
+  }
+};
+
+export const deleteConversation = async (req, res) => {
+  const conversationId = req.params.id;
+
+  try {
+    const deletedConversation = await deleteConversationDB(conversationId);
+
+    if (deletedConversation) {
+      return res.json({
+        success: true,
+        message: `Conversation with ID ${conversationId} deleted successfully.`,
+      });
+    } else {
+      return res.json({
+        success: false,
+        message: "Conversation not found in Controller.",
+      });
+    }
   } catch (error) {
     console.log(error);
     return sendDataResponse(res, 500, "Internal server error");

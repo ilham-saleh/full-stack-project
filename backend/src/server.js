@@ -20,10 +20,13 @@ app.use(cookieParser());
 const port = process.env.PORT || 8000;
 
 import userRouter from "./routes/users.js";
-app.use("/users", userRouter);
+app.use("/user", userRouter);
 
 import messageRouter from "./routes/messages.js";
-app.use("/messages", messageRouter);
+app.use("/message", messageRouter);
+
+import converstionRouter from "./routes/conversation.js";
+app.use("/conversation", converstionRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);

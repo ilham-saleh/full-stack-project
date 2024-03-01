@@ -61,3 +61,60 @@ export const createMessageDB = async (
     console.error("Error creating message:", error);
   }
 };
+
+export const deleteMessageDB = async (messageId) => {
+  try {
+    const deletedMessage = await prisma.message.delete({
+      where: { id: Number(messageId) },
+    });
+
+    return deletedMessage;
+  } catch (error) {
+    console.error("Error deleting message:", error);
+  }
+};
+
+export const deleteConversationDB = async (conversationId) => {
+  try {
+    // Parse the conversationId to ensure it's a number
+    const parsedConversationId = parseInt(conversationId, 10);
+
+    // Find the conversation and include messages
+    const conversationWithMessages = await prisma.conversation.findUnique({
+      where: { id: parsedConversationId },
+      include: { messages: true },
+    });
+
+    // Check if the conversation exists
+    if (!conversationWithMessages) {
+      console.error(
+        `Conversation with ID ${parsedConversationId} not found in Prisma`
+      );
+      return null; // Return null if the conversation doesn't exist
+    }
+
+    // If it was the last conversation and it had messages, delete them
+    if (
+      conversationWithMessages.messages &&
+      conversationWithMessages.messages.length > 0
+    ) {
+      await prisma.message.deleteMany({
+        where: {
+          id: {
+            in: conversationWithMessages.messages.map((msg) => msg.id),
+          },
+        },
+      });
+    }
+
+    // Delete the conversation after deleting related messages
+    const deletedConversation = await prisma.conversation.delete({
+      where: { id: parsedConversationId },
+    });
+
+    return deletedConversation;
+  } catch (error) {
+    console.error("Error deleting conversation:", error);
+    throw error; // Re-throw the error to be handled by the calling function
+  }
+};
