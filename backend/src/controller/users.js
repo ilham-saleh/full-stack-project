@@ -79,11 +79,11 @@ export const login = async (req, res) => {
       return sendDataResponse(res, 401, "Invalid username or password");
     }
 
-    generateToken(username, res);
+    const token = generateToken(username, res);
 
     delete existingUser.password;
 
-    res.json({ user: existingUser });
+    res.json({ user: existingUser, token });
   } catch (error) {
     console.log(error);
     return sendDataResponse(res, 500, "Internal server error");
