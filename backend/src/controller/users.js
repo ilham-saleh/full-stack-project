@@ -11,7 +11,7 @@ import generateToken from "../utils/generateToken.js";
 import sendDataResponse from "../utils/responses.js";
 
 export const signup = async (req, res) => {
-  const { fullName, username, password, confirmPassword, gender } = req.body;
+  const { email, username, password, confirmPassword, gender } = req.body;
 
   const hasUppercase = /[A-Z]/.test(password);
   const hasNumber = /\d/.test(password);
@@ -20,7 +20,7 @@ export const signup = async (req, res) => {
   );
 
   try {
-    if (!fullName || !username || !password || !gender) {
+    if (!email || !username || !password || !gender) {
       return sendDataResponse(res, 406, "Necessary fields required to fill in");
     }
 
@@ -49,7 +49,7 @@ export const signup = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = await createUserDB(
-      fullName,
+      email,
       username,
       hashedPassword,
       gender,
@@ -58,7 +58,7 @@ export const signup = async (req, res) => {
 
     generateToken(username, res);
 
-    res.status(201).json({ newUser });
+    res.status(201).json({ data: newUser });
   } catch (error) {
     console.log(error);
     return sendDataResponse(res, 500, "Internal server error");
@@ -83,7 +83,7 @@ export const login = async (req, res) => {
 
     delete existingUser.password;
 
-    res.json({ user: existingUser, token });
+    res.json({ data: existingUser, token });
   } catch (error) {
     console.log(error);
     return sendDataResponse(res, 500, "Internal server error");
@@ -102,7 +102,7 @@ export const logout = async (req, res) => {
 
 export const getUsers = async (req, res) => {
   const users = await getUsersDB();
-  res.json({ users });
+  res.json({ data: users });
 };
 
 export const getUserById = async (req, res) => {
@@ -111,7 +111,7 @@ export const getUserById = async (req, res) => {
 
     const user = await getUserByIdDB(userId);
 
-    res.json({ user });
+    res.json({ data: user });
   } catch (error) {
     console.log(error);
     return sendDataResponse(res, 500, "Internal server error");

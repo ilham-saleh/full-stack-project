@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const createUserDB = async (
-  fullName,
+  email,
   username,
   hashedPassword,
   gender,
@@ -11,7 +11,7 @@ export const createUserDB = async (
   try {
     const newUser = await prisma.user.create({
       data: {
-        fullName: fullName,
+        email: email,
         username: username,
         password: hashedPassword,
         gender: gender,

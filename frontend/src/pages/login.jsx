@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/login";
 
+const URL = "http://localhost:3030";
 const LoginPage = () => {
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -33,24 +35,23 @@ const LoginPage = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginData),
     };
-    const response = await fetch("http://localhost:3030/user/login", option);
+    const response = await fetch(`${URL}/user/login`, option);
     const result = await response.json();
     if (response.ok) {
-      console.log(result);
-      // setError(null);
-      // localStorage.setItem("userToken", result.token);
-      // localStorage.setItem("username", result.data.username);
+      console.log(result.data);
+      setError(null);
+      localStorage.setItem("userToken", result.token);
+      localStorage.setItem("user", result.data);
       navigate("/");
     } else {
-      // const result = await response.json();
-      // setError(result.error);
-      console.log(result.error);
-      console.log("error hapened");
+      setError(result.error);
+      console.log(error);
     }
   };
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <LoginForm
+        error={error}
         loginData={loginData}
         handleLogin={handleLogin}
         handleInputChange={handleInputChange}

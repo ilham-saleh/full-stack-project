@@ -1,14 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const LoginForm = ({ loginData, handleLogin, handleInputChange }) => {
+const LoginForm = ({ loginData, error, handleLogin, handleInputChange }) => {
   return (
     <div className="h-screen flex flex-col sm:flex-row w-full justify-center">
       <div className="hidden sm:flex w-full sm:w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 justify-around items-center">
         <div>
-          <h1 className="text-white font-bold text-4xl font-sans">GoFinance</h1>
+          <h1 className="text-white font-bold text-4xl font-sans">
+            Discpver Today
+          </h1>
           <p className="text-white mt-1">
-            The most popular peer-to-peer lending at SEA
+            Most amazing things are waiting for you
           </p>
           <button
             type="submit"
@@ -19,10 +21,14 @@ const LoginForm = ({ loginData, handleLogin, handleInputChange }) => {
         </div>
       </div>
       <div className="flex w-full sm:w-1/2 justify-center items-center bg-white">
+        {error && (
+          <div className="error-message absolute top-0 left-0 right-0 bg-red-500 text-white p-2 text-center">
+            {/* Display error message with animation */}
+            <div className="animate-fadeInOut">{error}</div>
+          </div>
+        )}
         <form onSubmit={handleLogin} className="bg-white w-full max-w-md p-8">
-          <h1 className="text-gray-800 font-bold text-2xl mb-1">
-            Hello Again!
-          </h1>
+          <h1 className="text-gray-800 font-bold text-2xl mb-1">Sign in!</h1>
           <p className="text-sm font-normal text-gray-600 mb-7">Welcome Back</p>
           <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
             <svg
@@ -72,7 +78,8 @@ const LoginForm = ({ loginData, handleLogin, handleInputChange }) => {
           </div>
           <button
             type="submit"
-            className="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+            className="block w-full bg-black mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+            // bg-indigo-600
           >
             Login
           </button>

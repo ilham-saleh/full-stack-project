@@ -5,12 +5,13 @@ import SignUpForm from "../components/signup";
 
 const SignUpPage = () => {
   const [userData, setUserData] = useState({
-    fullName: "",
+    email: "",
     username: "",
     password: "",
     confirmPassword: "",
     gender: "",
   });
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -22,7 +23,6 @@ const SignUpPage = () => {
         [name]: value,
       };
 
-      console.log(newUserData);
       // Return the new object as the updated state
       return newUserData;
     });
@@ -44,13 +44,13 @@ const SignUpPage = () => {
         "http://localhost:3030/user/signup",
         options
       );
+      const result = await response.json();
       if (response.ok) {
-        const result = await response.json();
         console.log(result);
         navigate("/login");
       } else {
-        const result = await response.json();
-        console.log(result.error);
+        setError(result.error);
+        console.log(error);
       }
     } catch (error) {
       console.error("Error during signup:", error);
@@ -60,6 +60,7 @@ const SignUpPage = () => {
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <SignUpForm
         userData={userData}
+        error={error}
         handleInputChange={handleInputChange}
         handleSignUp={handleSignUp}
       />

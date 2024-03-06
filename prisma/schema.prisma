@@ -10,13 +10,13 @@ datasource db {
 }
 
 enum Gender {
-  male
-  female
+  Male
+  Female
 }
 
 model User {
   id                  Int             @id @default(autoincrement())
-  fullName            String
+  email               String
   username            String          @unique
   password            String
   gender              Gender
