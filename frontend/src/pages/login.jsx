@@ -1,14 +1,25 @@
 // LoginPage.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/login";
 
 const URL = "http://localhost:3030";
+
+const loginLocalStorage = () => {
+  const storedUser = localStorage.getItem("user");
+  try {
+    return storedUser ? JSON.parse(storedUser) : { username: "", password: "" };
+  } catch (error) {
+    console.log("Error in login Localstorage", error);
+    return {
+      username: "",
+      password: "",
+    };
+  }
+};
+
 const LoginPage = () => {
-  const [loginData, setLoginData] = useState({
-    username: "",
-    password: "",
-  });
+  const [loginData, setLoginData] = useState(loginLocalStorage());
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -40,14 +51,16 @@ const LoginPage = () => {
     if (response.ok) {
       console.log(result.data);
       setError(null);
-      localStorage.setItem("userToken", result.token);
-      localStorage.setItem("user", result.data);
       navigate("/");
     } else {
       setError(result.error);
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(loginData));
+  }, [loginData]);
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <LoginForm

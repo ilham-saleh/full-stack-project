@@ -1,16 +1,34 @@
 // SignUpPage.js
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SignUpForm from "../components/signup";
 
+const signupLocalStorage = () => {
+  const storedUser = localStorage.getItem("userSignUp");
+  try {
+    return storedUser
+      ? JSON.parse(storedUser)
+      : {
+          email: "",
+          username: "",
+          pasword: "",
+          confirmPassword: "",
+          gender: "",
+        };
+  } catch (error) {
+    console.error("Error parsing stored user:", error);
+    return {
+      email: "",
+      username: "",
+      pasword: "",
+      confirmPassword: "",
+      gender: "",
+    };
+  }
+};
+
 const SignUpPage = () => {
-  const [userData, setUserData] = useState({
-    email: "",
-    username: "",
-    password: "",
-    confirmPassword: "",
-    gender: "",
-  });
+  const [userData, setUserData] = useState(signupLocalStorage());
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -47,6 +65,7 @@ const SignUpPage = () => {
       const result = await response.json();
       if (response.ok) {
         console.log(result);
+        localStorage.removeItem("userSignUp");
         navigate("/login");
       } else {
         setError(result.error);
@@ -56,6 +75,10 @@ const SignUpPage = () => {
       console.error("Error during signup:", error);
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("userSignUp", JSON.stringify(userData));
+  }, [userData]);
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <SignUpForm
