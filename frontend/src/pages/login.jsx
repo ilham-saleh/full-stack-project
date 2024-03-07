@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/login";
+import { useAuthContext } from "../AuthContext";
 
 const URL = "http://localhost:3030";
 
@@ -21,6 +22,8 @@ const loginLocalStorage = () => {
 const LoginPage = () => {
   const [loginData, setLoginData] = useState(loginLocalStorage());
   const [error, setError] = useState("");
+
+  const { setAuthUser } = useAuthContext();
 
   const navigate = useNavigate();
 
@@ -51,6 +54,8 @@ const LoginPage = () => {
     if (response.ok) {
       console.log(result.data);
       setError(null);
+      localStorage.setItem("user", JSON.stringify(loginData));
+      setAuthUser(loginData);
       navigate("/");
     } else {
       setError(result.error);
@@ -58,9 +63,6 @@ const LoginPage = () => {
     }
   };
 
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(loginData));
-  }, [loginData]);
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <LoginForm

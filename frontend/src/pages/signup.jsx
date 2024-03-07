@@ -20,7 +20,7 @@ const signupLocalStorage = () => {
     return {
       email: "",
       username: "",
-      pasword: "",
+      password: "",
       confirmPassword: "",
       gender: "",
     };
