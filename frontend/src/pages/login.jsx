@@ -1,7 +1,7 @@
 // LoginPage.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginForm from "../components/login";
+import LoginForm from "../components/auth/login";
 import { useAuthContext } from "../AuthContext";
 
 const URL = "http://localhost:3030";
@@ -62,6 +62,10 @@ const LoginPage = () => {
       console.log(error);
     }
   };
+
+  // useEffect(() => {
+  //   localStorage.setItem("user", JSON.stringify(loginData));
+  // }, [loginData]);
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">

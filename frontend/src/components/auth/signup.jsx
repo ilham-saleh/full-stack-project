@@ -9,7 +9,7 @@ const SignUpForm = ({ userData, error, handleInputChange, handleSignUp }) => {
             Discover Today
           </h1>
           <p className="text-white mt-1">
-            The most popular peer-to-peer lending at SEA
+            The most amazing things are waiting for you!
           </p>
           <button
             type="submit"

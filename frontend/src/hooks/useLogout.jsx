@@ -1,8 +1,11 @@
 import { useAuthContext } from "../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const useLogout = () => {
   // const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
+
+  // const navigate = useNavigate();
 
   const logout = async () => {
     // setLoading(true);
@@ -16,7 +19,7 @@ const useLogout = () => {
         throw new Error(result.error);
       }
       console.log(result);
-      localStorage.removeItem("user");
+      localStorage.clear();
       setAuthUser(null);
     } catch (error) {
       console.log(error.message);

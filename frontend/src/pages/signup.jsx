@@ -1,7 +1,7 @@
 // SignUpPage.js
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import SignUpForm from "../components/signup";
+import SignUpForm from "../components/auth/signup";
 
 const signupLocalStorage = () => {
   const storedUser = localStorage.getItem("userSignUp");

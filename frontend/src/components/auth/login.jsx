@@ -7,7 +7,7 @@ const LoginForm = ({ loginData, error, handleLogin, handleInputChange }) => {
       <div className="hidden sm:flex w-full sm:w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 justify-around items-center">
         <div>
           <h1 className="text-white font-bold text-4xl font-sans">
-            Discpver Today
+            Discover Today
           </h1>
           <p className="text-white mt-1">
             Most amazing things are waiting for you
