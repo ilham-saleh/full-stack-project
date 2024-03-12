@@ -3,8 +3,7 @@ import { Grid } from "@chakra-ui/react";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 import Messages from "../components/message/messages";
-import Users from "../components/message/users";
-import useGetConversations from "../hooks/useGetConversations";
+import Conversations from "../components/message/conversations";
 
 // Dummy data for messages and users
 const messages = [
@@ -46,15 +45,13 @@ const users = [
 ];
 
 const MessagesPage = () => {
-  const { loading, conversations } = useGetConversations();
-  console.log(conversations);
   return (
     <Grid h="100vh" templateColumns="3fr 1fr" templateRows="1fr" gap={0}>
       {/* Messages column */}
       <Messages messages={messages} />
 
       {/* Users column */}
-      <Users users={users} />
+      <Conversations users={users} />
     </Grid>
   );
 };
