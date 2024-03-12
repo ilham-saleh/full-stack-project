@@ -4,37 +4,38 @@ import { RxHamburgerMenu } from "react-icons/rx";
 
 import Messages from "../components/message/messages";
 import Users from "../components/message/users";
+import useGetConversations from "../hooks/useGetConversations";
 
 // Dummy data for messages and users
 const messages = [
-  // {
-  //   id: 1,
-  //   sender: "Alice",
-  //   receiver: "Bob",
-  //   content: "Hi Bob, how are you?",
-  //   time: "10:00 AM",
-  // },
-  // {
-  //   id: 2,
-  //   sender: "Bob",
-  //   receiver: "Alice",
-  //   content: "I'm good, thanks. How about you?",
-  //   time: "10:05 AM",
-  // },
-  // {
-  //   id: 3,
-  //   sender: "Alice",
-  //   receiver: "Bob",
-  //   content: "I'm fine too. Just working on a project.",
-  //   time: "10:10 AM",
-  // },
-  // {
-  //   id: 4,
-  //   sender: "Bob",
-  //   receiver: "Alice",
-  //   content: "Oh, what kind of project?",
-  //   time: "10:15 AM",
-  // },
+  {
+    id: 1,
+    sender: "Alice",
+    receiver: "Bob",
+    content: "Hi Bob, how are you?",
+    time: "10:00 AM",
+  },
+  {
+    id: 2,
+    sender: "Bob",
+    receiver: "Alice",
+    content: "I'm good, thanks. How about you?",
+    time: "10:05 AM",
+  },
+  {
+    id: 3,
+    sender: "Alice",
+    receiver: "Bob",
+    content: "I'm fine too. Just working on a project.",
+    time: "10:10 AM",
+  },
+  {
+    id: 4,
+    sender: "Bob",
+    receiver: "Alice",
+    content: "Oh, what kind of project?",
+    time: "10:15 AM",
+  },
 ];
 
 const users = [
@@ -45,6 +46,8 @@ const users = [
 ];
 
 const MessagesPage = () => {
+  const { loading, conversations } = useGetConversations();
+  console.log(conversations);
   return (
     <Grid h="100vh" templateColumns="3fr 1fr" templateRows="1fr" gap={0}>
       {/* Messages column */}

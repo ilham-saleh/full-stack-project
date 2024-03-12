@@ -1,7 +1,10 @@
 import React from "react";
 import { Box, Avatar, Text, AvatarBadge, Divider } from "@chakra-ui/react";
+import useGetConversations from "../../hooks/useGetConversations";
 
 const Conversations = ({ user }) => {
+  // const { loading, conversations } = useGetConversations();
+  // console.log(conversations);
   return (
     <>
       <Box

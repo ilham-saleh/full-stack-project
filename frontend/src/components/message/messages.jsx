@@ -3,7 +3,7 @@ import { GridItem, Box, Text, Button, Input } from "@chakra-ui/react";
 
 import Message from "./message";
 
-const Messages = ({ messages, users }) => {
+const Messages = ({ messages }) => {
   return (
     <GridItem as={Box} bg="white" overflowY="auto">
       <Box display="flex" flexDirection="column" height="100%">
