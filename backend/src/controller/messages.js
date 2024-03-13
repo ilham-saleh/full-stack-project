@@ -1,3 +1,4 @@
+import { json } from "express";
 import {
   createConversationDB,
   createMessageDB,
@@ -11,6 +12,10 @@ export const sendMessage = async (req, res) => {
   const receiverId = req.params.id;
   const { message } = req.body;
   const senderId = req.user.id;
+
+  if (!message) {
+    return sendDataResponse(res, 400, "Content is required!");
+  }
 
   try {
     let conversation = await getConversationsDB(senderId);

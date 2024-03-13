@@ -17,8 +17,8 @@ const useConversation = create((set) => {
       );
       set({ selectedConversation });
     },
-    message: [],
-    setMessage: (message) => set({ message }),
+    messages: [],
+    setMessages: (messages) => set({ messages }),
   };
 });
 

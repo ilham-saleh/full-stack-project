@@ -52,10 +52,11 @@ const LoginPage = () => {
     const response = await fetch(`${URL}/user/login`, option);
     const result = await response.json();
     if (response.ok) {
-      console.log(result.data);
+      console.log(result.token);
       setError(null);
-      localStorage.setItem("user", JSON.stringify(loginData));
-      setAuthUser(loginData);
+      localStorage.setItem("user", JSON.stringify(result.data));
+      localStorage.setItem("token", result.token);
+      setAuthUser(result.data);
       navigate("/");
     } else {
       setError(result.error);

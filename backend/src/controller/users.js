@@ -45,7 +45,7 @@ export const signup = async (req, res) => {
     const femaleProfileImage = `https://avatar.iran.liara.run/public/girl?username=${username}`;
 
     const profileImage =
-      gender === "male" ? maleProfileImage : femaleProfileImage;
+      gender === "Male" ? maleProfileImage : femaleProfileImage;
 
     const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = await createUserDB(

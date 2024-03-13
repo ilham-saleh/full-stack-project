@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Avatar, Text, AvatarBadge, Divider } from "@chakra-ui/react";
 import useConversation from "../../zustand/useConversation";
+import { useAuthContext } from "../../AuthContext";
 
 const User = ({ user }) => {
   const { selectedConversation, setSelectedConversation } = useConversation();

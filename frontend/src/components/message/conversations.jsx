@@ -33,9 +33,9 @@ const Conversations = () => {
       </Box>
       <Box p={2} overflowY="auto">
         {loading || users.length === 0
-          ? // Show skeletons if loading or no users
-            renderSkeletons(count) // Adjust the count as needed
-          : // Render actual content when loading is false and users exist
+          ?
+            renderSkeletons(count) 
+          : 
             users.map((user) => <User key={user.id} user={user} />)}
       </Box>
     </GridItem>
