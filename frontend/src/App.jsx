@@ -19,6 +19,7 @@ import useLogout from "./hooks/useLogout";
 import { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import ProtectedRoute from "./components/protectedRoute";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -36,8 +37,26 @@ function App() {
     <ChakraProvider>
       {/* Routes */}
       <Routes>
-        <Route path="/" element={authUser ? <Home /> : <LoginPage />} />
-        <Route path="/messages" element={<Messages />} />
+        <Route
+          path="/"
+          element={
+            authUser ? (
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            ) : (
+              <LoginPage />
+            )
+          }
+        />
+        <Route
+          path="/messages"
+          element={
+            <ProtectedRoute>
+              <Messages />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
       </Routes>

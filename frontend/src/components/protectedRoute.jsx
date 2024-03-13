@@ -1,5 +1,4 @@
 import {
-  ChakraProvider,
   Box,
   Text,
   Button,
@@ -8,11 +7,13 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { HamburgerIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
+import useLogout from "../hooks/useLogout";
 
 const ProtectedRoute = ({ children }) => {
-  // const { logout } = useLogout();
-
-  // const navigate = useNavigate();
+  const { logout } = useLogout();
 
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -20,12 +21,6 @@ const ProtectedRoute = ({ children }) => {
     setMenuOpen(!menuOpen);
   };
   return (
-    // <div className="container">
-    //   <Header />
-    //   <Navigation />
-    //   <Modal />
-    //   {children}
-    // </div>
     <Box display="flex" minH="100vh">
       {/* Sidebar/Menu */}
       <Box
@@ -52,7 +47,7 @@ const ProtectedRoute = ({ children }) => {
           <Spacer />
 
           <Button
-            onClick={() => navigate("/login")}
+            onClick={logout}
             variant="outline"
             colorScheme="whiteAlpha"
             leftIcon={<ArrowForwardIcon />}
