@@ -6,7 +6,6 @@ import useConversation from "../../zustand/useConversation";
 
 const Message = ({ message, loading }) => {
   const { authUser } = useAuthContext();
-  // console.log(authUser);
   const { selectedConversation } = useConversation();
 
   const fromMe = message.senderId === authUser.id;
@@ -18,6 +17,14 @@ const Message = ({ message, loading }) => {
 
   const bubbleBgColor = fromMe ? "bg-blue-500" : "";
 
+  const createdAt = new Date(message.createdAt);
+  const messageTime =
+    createdAt instanceof Date
+      ? `${createdAt.getHours()}:${String(createdAt.getMinutes()).padStart(
+          2,
+          "0"
+        )}`
+      : "";
   return (
     <>
       {loading ? (
@@ -38,7 +45,7 @@ const Message = ({ message, loading }) => {
               {/* <time className="text-xs opacity-50">12:45</time> */}
             </div>
             <div className={`chat-bubble ${bubbleBgColor}`}>{message.text}</div>
-            <div className="chat-footer opacity-50">{message.createdAt}</div>
+            <div className="chat-footer opacity-50">{messageTime}</div>
           </div>
         </>
       )}

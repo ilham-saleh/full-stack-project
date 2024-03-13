@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/auth/login";
 import { useAuthContext } from "../AuthContext";
+import { toast } from "react-toastify";
 
 const URL = "http://localhost:3030";
 
@@ -21,7 +22,6 @@ const loginLocalStorage = () => {
 
 const LoginPage = () => {
   const [loginData, setLoginData] = useState(loginLocalStorage());
-  const [error, setError] = useState("");
 
   const { setAuthUser } = useAuthContext();
 
@@ -35,8 +35,6 @@ const LoginPage = () => {
         [name]: value,
       };
 
-      console.log(newUserData);
-      // Return the new object as the updated state
       return newUserData;
     });
   };
@@ -53,14 +51,12 @@ const LoginPage = () => {
     const result = await response.json();
     if (response.ok) {
       console.log(result.token);
-      setError(null);
       localStorage.setItem("user", JSON.stringify(result.data));
       localStorage.setItem("token", result.token);
       setAuthUser(result.data);
       navigate("/");
     } else {
-      setError(result.error);
-      console.log(error);
+      toast(result.error);
     }
   };
 
@@ -71,7 +67,6 @@ const LoginPage = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <LoginForm
-        error={error}
         loginData={loginData}
         handleLogin={handleLogin}
         handleInputChange={handleInputChange}

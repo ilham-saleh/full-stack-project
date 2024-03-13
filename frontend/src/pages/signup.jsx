@@ -1,6 +1,7 @@
 // SignUpPage.js
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import SignUpForm from "../components/auth/signup";
 
 const signupLocalStorage = () => {
@@ -29,7 +30,6 @@ const signupLocalStorage = () => {
 
 const SignUpPage = () => {
   const [userData, setUserData] = useState(signupLocalStorage());
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -68,8 +68,7 @@ const SignUpPage = () => {
         localStorage.removeItem("userSignUp");
         navigate("/login");
       } else {
-        setError(result.error);
-        console.log(error);
+        toast(result.error);
       }
     } catch (error) {
       console.error("Error during signup:", error);
@@ -83,7 +82,6 @@ const SignUpPage = () => {
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <SignUpForm
         userData={userData}
-        error={error}
         handleInputChange={handleInputChange}
         handleSignUp={handleSignUp}
       />

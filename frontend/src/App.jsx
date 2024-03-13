@@ -16,6 +16,9 @@ import LoginPage from "./pages/login";
 import SignUpPage from "./pages/signup";
 import { useAuthContext } from "./AuthContext";
 import useLogout from "./hooks/useLogout";
+import { Toaster } from "react-hot-toast";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -38,6 +41,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
       </Routes>
+      <ToastContainer />
     </ChakraProvider>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const LoginForm = ({ loginData, error, handleLogin, handleInputChange }) => {
+const LoginForm = ({ loginData, handleLogin, handleInputChange }) => {
   return (
     <div className="h-screen flex flex-col sm:flex-row w-full justify-center">
       <div className="hidden sm:flex w-full sm:w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 justify-around items-center">
@@ -21,12 +21,6 @@ const LoginForm = ({ loginData, error, handleLogin, handleInputChange }) => {
         </div>
       </div>
       <div className="flex w-full sm:w-1/2 justify-center items-center bg-white">
-        {error && (
-          <div className="error-message absolute top-0 left-0 right-0 bg-red-500 text-white p-2 text-center">
-            {/* Display error message with animation */}
-            <div className="animate-fadeInOut">{error}</div>
-          </div>
-        )}
         <form onSubmit={handleLogin} className="bg-white w-full max-w-md p-8">
           <h1 className="text-gray-800 font-bold text-2xl mb-1">Sign in!</h1>
           <p className="text-sm font-normal text-gray-600 mb-7">Welcome Back</p>
