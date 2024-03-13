@@ -47,10 +47,8 @@ const users = [
 const MessagesPage = () => {
   return (
     <Grid h="100vh" templateColumns="3fr 1fr" templateRows="1fr" gap={0}>
-      {/* Messages column */}
       <Messages messages={messages} />
 
-      {/* Users column */}
       <Conversations users={users} />
     </Grid>
   );

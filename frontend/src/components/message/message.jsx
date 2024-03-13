@@ -1,10 +1,11 @@
 import React from "react";
 import useGetUsers from "../../hooks/useGetUsers";
 import MessageSkeleton from "../messageSkeleton";
+import { useAuthContext } from "../../AuthContext";
 
-const Message = ({ message }) => {
+const Message = ({ message, selectedConversation }) => {
   const { loading } = useGetUsers();
-  console.log(message.content);
+  const { authUser } = useAuthContext();
   // const isSent = message.sender === "Alice";
   return (
     <>
@@ -22,7 +23,7 @@ const Message = ({ message }) => {
               </div>
             </div>
             <div className="chat-header">
-              Obi-Wan Kenobi
+              {selectedConversation.username}
               {/* <time className="text-xs opacity-50">12:45</time> */}
             </div>
             <div className="chat-bubble">You were the Chosen One!</div>
@@ -38,7 +39,7 @@ const Message = ({ message }) => {
               </div>
             </div>
             <div className="chat-header">
-              Anakin
+              {authUser.username}
               {/* <time className="text-xs opacity-50">12:46</time> */}
             </div>
             <div className="chat-bubble">I hate you!</div>

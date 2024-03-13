@@ -19,6 +19,7 @@ const Conversations = () => {
       </div>
     ));
   };
+  console.log(users);
 
   return (
     <GridItem as={Box} bg="gray.50" overflowY="auto">

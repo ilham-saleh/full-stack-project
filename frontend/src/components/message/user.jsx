@@ -1,7 +1,16 @@
 import React from "react";
 import { Box, Avatar, Text, AvatarBadge, Divider } from "@chakra-ui/react";
+import useConversation from "../../zustand/useConversation";
 
 const User = ({ user }) => {
+  const { selectedConversation, setSelectedConversation } = useConversation();
+
+  const isSelected = selectedConversation?.id === user.id;
+
+  const handleClick = () => {
+    setSelectedConversation(user); // Set the entire user object as the selectedConversation
+  };
+
   return (
     <>
       <Box
@@ -9,7 +18,9 @@ const User = ({ user }) => {
         alignItems="center"
         p={2}
         cursor="pointer"
-        _hover={{ bg: "gray.200" }}
+        _hover={!isSelected && { bg: "gray.200" }}
+        onClick={handleClick}
+        bg={isSelected ? "blue.200" : ""} // Use "blue.200" or any desired color
       >
         <Avatar src={user.profileImage} size="sm">
           <AvatarBadge boxSize="1em" bg="green" />
