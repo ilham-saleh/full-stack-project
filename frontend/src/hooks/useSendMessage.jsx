@@ -24,7 +24,7 @@ const UseSendMessage = () => {
         options
       );
       const result = await res.json();
-      console.log(result.data);
+      console.log(result.error);
       if (result.error) {
         // throw new Error(result.error);
         toast(result.error);

@@ -8,12 +8,18 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import useLogout from "../hooks/useLogout";
 
 const ProtectedRoute = ({ children }) => {
   const { logout } = useLogout();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login"); // Redirect to the login page after logout
+  };
 
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -47,7 +53,7 @@ const ProtectedRoute = ({ children }) => {
           <Spacer />
 
           <Button
-            onClick={logout}
+            onClick={handleLogout}
             variant="outline"
             colorScheme="whiteAlpha"
             leftIcon={<ArrowForwardIcon />}

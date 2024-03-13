@@ -42,16 +42,27 @@ export const sendMessage = async (req, res) => {
       targetConversation?.id || conversation.id
     );
 
-    // Check if conversation.messages is an array
+    // // Check if conversation.messages is an array
+    // if (!Array.isArray(targetConversation?.messages)) {
+    //   // Assign a default value to conversation.messages if it is undefined
+    //   targetConversation.messages = targetConversation.messages || [];
+    // }
+
+    // if (newMessage) {
+    //   targetConversation.messages.push(newMessage);
+    // }
+
+    // res.json({ data: newMessage });
+    // After retrieving or creating the conversation
     if (!Array.isArray(targetConversation?.messages)) {
-      // Assign a default value to conversation.messages if it is undefined
-      targetConversation.messages = targetConversation.messages || [];
+      // Initialize messages as an empty array if it's undefined
+      targetConversation.messages = [];
     }
 
-    if (newMessage) {
-      targetConversation.messages.push(newMessage);
-    }
+    // Push the new message to the messages array
+    targetConversation.messages.push(newMessage);
 
+    // Respond with the updated conversation
     res.json({ data: newMessage });
   } catch (error) {
     console.log(error);
