@@ -3,7 +3,6 @@ import { GridItem, Box, Input } from "@chakra-ui/react";
 
 import User from "./user";
 import useGetUsers from "../../hooks/useGetUsers";
-import { useSocketContext } from "../../context/SocketContext";
 
 const Conversations = () => {
   const { loading, users } = useGetUsers();

@@ -7,11 +7,14 @@ import { useAuthContext } from "../../context/AuthContext";
 import useConversation from "../../zustand/useConversation";
 import MessageInput from "./messageInput";
 import useGetMessages from "../../hooks/useGetMessages";
+import useListenMessages from "../../hooks/useListenMessages";
 
 const Messages = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
   const { loading, messages } = useGetMessages();
   const messagesContainerRef = useRef(null);
+
+  // useListenMessages();
 
   useEffect(() => {
     // Set the selected conversation when the component mounts
@@ -36,10 +39,10 @@ const Messages = () => {
           flex="1"
           p={2}
           overflowY="auto"
-          style={{ scrollBehavior: "smooth" }} // Apply smooth scroll to the container
+          style={{ scrollBehavior: "smooth" }}
         >
           {selectedConversation && messages?.length > 0 ? (
-            messages?.map((message) => (
+            messages.map((message) => (
               <Message key={message.id} message={message} loading={loading} />
             ))
           ) : (

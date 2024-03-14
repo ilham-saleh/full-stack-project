@@ -7,6 +7,7 @@ import {
   getConversationsDB,
 } from "../domain/messages.js";
 import sendDataResponse from "../utils/responses.js";
+import { getReceiverSocketId } from "../../socket/socket.js";
 
 export const sendMessage = async (req, res) => {
   const receiverId = req.params.id;
@@ -42,17 +43,6 @@ export const sendMessage = async (req, res) => {
       targetConversation?.id || conversation.id
     );
 
-    // // Check if conversation.messages is an array
-    // if (!Array.isArray(targetConversation?.messages)) {
-    //   // Assign a default value to conversation.messages if it is undefined
-    //   targetConversation.messages = targetConversation.messages || [];
-    // }
-
-    // if (newMessage) {
-    //   targetConversation.messages.push(newMessage);
-    // }
-
-    // res.json({ data: newMessage });
     // After retrieving or creating the conversation
     if (!Array.isArray(targetConversation?.messages)) {
       // Initialize messages as an empty array if it's undefined
@@ -61,6 +51,12 @@ export const sendMessage = async (req, res) => {
 
     // Push the new message to the messages array
     targetConversation.messages.push(newMessage);
+
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      // io.to(<socket_id>).emit() used to send events to specific client
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
 
     // Respond with the updated conversation
     res.json({ data: newMessage });

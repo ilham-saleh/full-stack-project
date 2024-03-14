@@ -1,12 +1,14 @@
 import React from "react";
-import useGetUsers from "../../hooks/useGetUsers";
 import MessageSkeleton from "../messageSkeleton";
 import { useAuthContext } from "../../context/AuthContext";
 import useConversation from "../../zustand/useConversation";
+import useListenMessages from "../../hooks/useListenMessages";
 
 const Message = ({ message, loading }) => {
   const { authUser } = useAuthContext();
   const { selectedConversation } = useConversation();
+
+  useListenMessages();
 
   const fromMe = message.senderId === authUser.id;
 

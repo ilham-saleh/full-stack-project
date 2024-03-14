@@ -7,7 +7,7 @@ const User = ({ user }) => {
   const { selectedConversation, setSelectedConversation } = useConversation();
   const { onlineUsers } = useSocketContext();
 
-  const isOnline = onlineUsers.includes(user.id);
+  const isOnline = onlineUsers.includes(String(user?.id));
   const isSelected = selectedConversation?.id === user.id;
 
   const handleClick = () => {
