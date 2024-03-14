@@ -1,5 +1,5 @@
 import React from "react";
-import MessageSkeleton from "../messageSkeleton";
+import MessageSkeleton from "./MessageSkeleton";
 import { useAuthContext } from "../../context/AuthContext";
 import useConversation from "../../zustand/useConversation";
 import useListenMessages from "../../hooks/useListenMessages";

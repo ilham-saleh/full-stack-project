@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GridItem, Box, Input } from "@chakra-ui/react";
 
-import User from "./user";
+import User from "./User";
 import useGetUsers from "../../hooks/useGetUsers";
 
 const Conversations = () => {

@@ -1,7 +1,7 @@
 // LoginPage.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginForm from "../components/auth/login";
+import LoginForm from "../components/auth/Login";
 import { useAuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
 

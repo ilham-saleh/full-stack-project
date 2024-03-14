@@ -2,8 +2,8 @@ import React from "react";
 import { Grid } from "@chakra-ui/react";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-import Messages from "../components/message/messages";
-import Conversations from "../components/message/conversations";
+import Messages from "../components/message/Messages";
+import Conversations from "../components/message/Conversations";
 
 const MessagesPage = () => {
   return (

@@ -2,10 +2,10 @@ import { useEffect, useRef } from "react";
 import { GridItem, Box } from "@chakra-ui/react";
 import { TiMessages } from "react-icons/ti";
 
-import Message from "./message";
+import Message from "./Message";
 import { useAuthContext } from "../../context/AuthContext";
 import useConversation from "../../zustand/useConversation";
-import MessageInput from "./messageInput";
+import MessageInput from "./MessageInput";
 import useGetMessages from "../../hooks/useGetMessages";
 import useListenMessages from "../../hooks/useListenMessages";
 

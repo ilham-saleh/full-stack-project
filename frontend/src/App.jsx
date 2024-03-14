@@ -10,16 +10,16 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { HamburgerIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import Home from "./pages/home";
-import Messages from "./pages/messages";
-import LoginPage from "./pages/login";
-import SignUpPage from "./pages/signup";
+import Home from "./pages/Home";
+import Messages from "./pages/Messages";
+import LoginPage from "./pages/Login";
+import SignUpPage from "./pages/Signup";
 import { useAuthContext } from "./context/AuthContext";
 import useLogout from "./hooks/useLogout";
 import { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import ProtectedRoute from "./components/protectedRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const { authUser } = useAuthContext();
