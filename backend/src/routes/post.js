@@ -1,10 +1,9 @@
 import express from "express";
-import createPost from "../controller/post.js";
-
-import * as dotenv from "dotenv";
+import { createPost, getPosts } from "../controller/post.js";
 
 const router = express.Router();
 
-router.get("/create", createPost);
+router.post("/create", createPost);
+router.get("/", getPosts);
 
 export default router;

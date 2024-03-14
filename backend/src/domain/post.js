@@ -16,3 +16,9 @@ export const createPostDB = async (name, prompt, image) => {
     throw error;
   }
 };
+
+export const getPostsDB = async () => {
+  const posts = await prisma.post.findMany();
+
+  return posts;
+};
