@@ -1,14 +1,8 @@
-import {
-  Box,
-  Text,
-  Button,
-  IconButton,
-  VStack,
-  Spacer,
-} from "@chakra-ui/react";
+import { Box, Button, IconButton, VStack, Spacer } from "@chakra-ui/react";
 import { HamburgerIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import logo from "../assets/logo.svg";
 
 import useLogout from "../hooks/useLogout";
 
@@ -43,11 +37,12 @@ const ProtectedRoute = ({ children }) => {
         <VStack spacing="4" align="stretch" height="100%">
           <Box textAlign="center">
             <Link to="/" fontSize="2xl" fontWeight="bold">
-              Logo
+              logo
             </Link>
           </Box>
 
           <Link to="/">Home</Link>
+          <Link to="/create-post">Create Post</Link>
           <Link to="/messages">Messages</Link>
 
           <Spacer />

@@ -20,6 +20,7 @@ import { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CreatePost from "./pages/CreatePost";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -54,6 +55,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Messages />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/create-post"
+          element={
+            <ProtectedRoute>
+              <CreatePost />
             </ProtectedRoute>
           }
         />
