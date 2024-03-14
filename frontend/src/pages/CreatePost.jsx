@@ -20,25 +20,22 @@ const CreatePost = () => {
 
   const generateImg = () => {};
 
-  const handleSurpriseMe = () => {};
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    console.log(form);
+  };
 
-  const handleChange = (e) => {};
+  const handleSurpriseMe = () => {
+    const randomPrompt = getRandomPrompt(form.prompt);
+    console.log(randomPrompt);
+
+    setForm({ ...form, prompt: randomPrompt });
+  };
 
   const handleSubmit = (e) => {};
 
   return (
     <>
-      {/* <header className="w-full flex justify-between items-center bg-white sm:px-8 px-4 py-4 border-b border-b-[#e6ebf3]">
-        <img src={logo} alt="App Logo" className="w-28 object-contain" />
-
-        <Link
-          to="/create-post"
-          className="font-inter font-medium bg-[#6469ff] text-white px-4 py-2 rounded-md"
-        >
-          Create
-        </Link>
-      </header> */}
-
       <main className="bg-[#f9fafe] sm:p-8 px-4 py-8 w-full min-h-[100vh]">
         <section className="max-w-7xl max-auto">
           <div>
@@ -69,7 +66,7 @@ const CreatePost = () => {
                 value={form.prompt}
                 handleChange={handleChange}
                 isSurpriseMe
-                handleSurprisMe={handleSurpriseMe}
+                handleSurpriseMe={handleSurpriseMe}
               />
             </div>
 
