@@ -14,7 +14,7 @@ const Messages = () => {
   const { loading, messages } = useGetMessages();
   const messagesContainerRef = useRef(null);
 
-  // useListenMessages();
+  useListenMessages();
 
   useEffect(() => {
     // Set the selected conversation when the component mounts

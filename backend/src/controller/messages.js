@@ -7,7 +7,7 @@ import {
   getConversationsDB,
 } from "../domain/messages.js";
 import sendDataResponse from "../utils/responses.js";
-import { getReceiverSocketId } from "../../socket/socket.js";
+import { getReceiverSocketId, io } from "../../socket/socket.js";
 
 export const sendMessage = async (req, res) => {
   const receiverId = req.params.id;
