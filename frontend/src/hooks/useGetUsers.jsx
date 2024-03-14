@@ -1,6 +1,5 @@
-
 import { useEffect, useState } from "react";
-import { useAuthContext } from "../AuthContext"; // Adjust the import path accordingly
+import { useAuthContext } from "../context/AuthContext"; // Adjust the import path accordingly
 
 const getCurrentUser = () => {
   // Assuming your authentication context provides the user information

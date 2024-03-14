@@ -3,7 +3,7 @@ import { GridItem, Box } from "@chakra-ui/react";
 import { TiMessages } from "react-icons/ti";
 
 import Message from "./message";
-import { useAuthContext } from "../../AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 import useConversation from "../../zustand/useConversation";
 import MessageInput from "./messageInput";
 import useGetMessages from "../../hooks/useGetMessages";

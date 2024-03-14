@@ -7,8 +7,7 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 dotenv.config();
 
-// //Create a new express application
-const app = express();
+import { app, server } from "../socket/socket.js";
 
 //Tell express we want to use the morgan library
 app.use(morgan("dev"));
@@ -28,6 +27,6 @@ app.use("/message", messageRouter);
 import converstionRouter from "./routes/conversation.js";
 app.use("/conversation", converstionRouter);
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);
 });

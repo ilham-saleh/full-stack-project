@@ -1,10 +1,13 @@
 import React from "react";
 import { Box, Avatar, Text, AvatarBadge, Divider } from "@chakra-ui/react";
 import useConversation from "../../zustand/useConversation";
+import { useSocketContext } from "../../context/SocketContext";
 
 const User = ({ user }) => {
   const { selectedConversation, setSelectedConversation } = useConversation();
+  const { onlineUsers } = useSocketContext();
 
+  const isOnline = onlineUsers.includes(user.id);
   const isSelected = selectedConversation?.id === user.id;
 
   const handleClick = () => {
@@ -24,7 +27,7 @@ const User = ({ user }) => {
         borderRadius={10}
       >
         <Avatar src={user.profileImage} size="sm">
-          <AvatarBadge boxSize="1em" bg="green" />
+          {isOnline && <AvatarBadge boxSize="1em" bg="green" />}
         </Avatar>
         <Text fontSize="md" ml={2}>
           {user.username}

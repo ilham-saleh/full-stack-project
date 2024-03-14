@@ -14,7 +14,7 @@ import Home from "./pages/home";
 import Messages from "./pages/messages";
 import LoginPage from "./pages/login";
 import SignUpPage from "./pages/signup";
-import { useAuthContext } from "./AuthContext";
+import { useAuthContext } from "./context/AuthContext";
 import useLogout from "./hooks/useLogout";
 import { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/auth/login";
-import { useAuthContext } from "../AuthContext";
+import { useAuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
 
 const URL = "http://localhost:3030";

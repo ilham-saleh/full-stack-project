@@ -1,7 +1,7 @@
 import React from "react";
 import useGetUsers from "../../hooks/useGetUsers";
 import MessageSkeleton from "../messageSkeleton";
-import { useAuthContext } from "../../AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 import useConversation from "../../zustand/useConversation";
 
 const Message = ({ message, loading }) => {

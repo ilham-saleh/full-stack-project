@@ -118,15 +118,3 @@ export const getUserById = async (req, res) => {
   }
 };
 
-export const getUserByUsername = async (req, res) => {
-  try {
-    const username = req.params.username;
-
-    const user = await findUserDB(username);
-
-    res.json({ data: user });
-  } catch (error) {
-    console.log(error);
-    return sendDataResponse(res, 500, "Internal server error");
-  }
-};
