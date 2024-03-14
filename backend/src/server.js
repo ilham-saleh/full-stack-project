@@ -27,6 +27,12 @@ app.use("/message", messageRouter);
 import converstionRouter from "./routes/conversation.js";
 app.use("/conversation", converstionRouter);
 
+import postRouter from "./routes/post.js";
+app.use("/post", postRouter);
+
+import DalleRouter from "./routes/dalle.js";
+app.use("/dalle", DalleRouter);
+
 server.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);
 });
