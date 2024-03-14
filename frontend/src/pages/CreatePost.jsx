@@ -5,6 +5,7 @@ import { getRandomPrompt } from "../utils";
 
 import { FormField, Loader } from "../components/home/index";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -18,7 +19,33 @@ const CreatePost = () => {
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const generateImg = () => {};
+  const generateImg = async () => {
+    if (form.prompt) {
+      try {
+        setGeneratingImg(true);
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ prompt: form.prompt }),
+        };
+        const response = await fetch(
+          "http://localhost:3030/dalle/generate",
+          options
+        );
+        const result = await response.json();
+
+        setForm({ ...form, image: result.data });
+      } catch (error) {
+        toast(error.message);
+      } finally {
+        setGeneratingImg(false);
+      }
+    } else {
+      toast("Please enter a prompt");
+    }
+  };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -50,7 +77,7 @@ const CreatePost = () => {
           <form className="mt-16 max-w-3xl" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-5">
               <FormField
-                labelName="Your name"
+                labelName="Your username"
                 type="text"
                 name="name"
                 placeholder="John Doe"
