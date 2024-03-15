@@ -26,11 +26,11 @@ erDiagram
         createdAt DateTime
         updatedAt DateTime
     }
-    User ||--o{ Message : sends
-    User ||--o{ Message : receives
-    User ||--o{ Conversation : participates
-    Message ||--|{ Conversation : belongs to
-    Post ||--|{ User : created by
+    User ||--o- Message : sends
+    User ||--o- Message : receives
+    User ||--o- Conversation : participates
+    Message ||--|- Conversation : belongs to
+    Post ||--|- User : created by
     Post {
         id INT
         name VARCHAR
@@ -39,5 +39,4 @@ erDiagram
         createdAt DateTime
         updatedAt DateTime
     }
-
 ```
