@@ -19,7 +19,7 @@ const useLogout = () => {
         throw new Error(result.error);
       }
       console.log(result);
-      localStorage.removeItem("user");
+      localStorage.clear();
       setAuthUser(null);
     } catch (error) {
       console.log(error.message);

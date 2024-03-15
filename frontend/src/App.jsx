@@ -1,37 +1,17 @@
-import { Route, Routes, Link, Navigate, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Button,
-  IconButton,
-  VStack,
-  Spacer,
-} from "@chakra-ui/react";
-import { HamburgerIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import { Route, Routes } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
 import Messages from "./pages/Messages";
 import LoginPage from "./pages/Login";
 import SignUpPage from "./pages/Signup";
 import { useAuthContext } from "./context/AuthContext";
-import useLogout from "./hooks/useLogout";
-import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/protectedRoute";
 import Home from "./pages/Home";
 import Community from "./pages/Community";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { authUser } = useAuthContext();
-  const { logout } = useLogout();
-
-  const navigate = useNavigate();
-
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
 
   return (
     <ChakraProvider>
