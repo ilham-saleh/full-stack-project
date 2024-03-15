@@ -42,7 +42,7 @@ const ProtectedRoute = ({ children }) => {
           </Box>
 
           <Link to="/">Home</Link>
-          <Link to="/create-post">Create Post</Link>
+          <Link to="/community">Community</Link>
           <Link to="/messages">Messages</Link>
 
           <Spacer />

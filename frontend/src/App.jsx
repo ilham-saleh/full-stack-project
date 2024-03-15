@@ -10,17 +10,16 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { HamburgerIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import Home from "./pages/Home";
 import Messages from "./pages/Messages";
 import LoginPage from "./pages/Login";
 import SignUpPage from "./pages/Signup";
 import { useAuthContext } from "./context/AuthContext";
 import useLogout from "./hooks/useLogout";
-import { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import ProtectedRoute from "./components/ProtectedRoute";
-import CreatePost from "./pages/CreatePost";
+import ProtectedRoute from "./components/protectedRoute";
+import Home from "./pages/Home";
+import Community from "./pages/Community";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -51,18 +50,18 @@ function App() {
           }
         />
         <Route
-          path="/messages"
+          path="/community"
           element={
             <ProtectedRoute>
-              <Messages />
+              <Community />
             </ProtectedRoute>
           }
         />
         <Route
-          path="/create-post"
+          path="/messages"
           element={
             <ProtectedRoute>
-              <CreatePost />
+              <Messages />
             </ProtectedRoute>
           }
         />
