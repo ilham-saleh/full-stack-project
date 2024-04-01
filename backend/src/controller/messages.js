@@ -19,33 +19,37 @@ export const sendMessage = async (req, res) => {
   }
 
   try {
-    let conversation = await getConversationsDB(senderId);
+    let conversations = await getConversationsDB(senderId);
 
-    if (!Array.isArray(conversation)) {
+    if (!Array.isArray(conversations)) {
       throw new Error("Conversations is not an array");
     }
 
     // Find the conversation with the specific receiver
-    const targetConversation = conversation.find((conv) =>
+    const targetConversation = conversations.find((conv) =>
       conv.participants.some(
         (participant) => participant.id === Number(receiverId)
       )
     );
+    console.log("Targetted Convs", targetConversation);
 
     if (!targetConversation) {
-      conversation = await createConversationDB(senderId, receiverId);
+      // If the conversation doesn't exist, create a new one
+      conversations = await createConversationDB(senderId, receiverId);
     }
+
+    // Get the conversation ID (either from existing or newly created conversation)
+    const conversationId = targetConversation?.id || conversations.id;
 
     const newMessage = await createMessageDB(
       message,
       senderId,
       receiverId,
-      targetConversation?.id || conversation.id
+      conversationId
     );
 
-    // After retrieving or creating the conversation
-    if (!Array.isArray(targetConversation?.messages)) {
-      // Initialize messages as an empty array if it's undefined
+    if (!targetConversation?.messages) {
+      // If messages array doesn't exist, initialize it
       targetConversation.messages = [];
     }
 
@@ -61,7 +65,7 @@ export const sendMessage = async (req, res) => {
     // Respond with the updated conversation
     res.json({ data: newMessage });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return sendDataResponse(res, 500, "Internal server error");
   }
 };

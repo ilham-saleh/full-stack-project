@@ -31,6 +31,7 @@ const UseSendMessage = () => {
       }
 
       setMessages([...messages, result.data]);
+      console.log("Result", result.data);
     } catch (error) {
       toast(error.message);
     } finally {

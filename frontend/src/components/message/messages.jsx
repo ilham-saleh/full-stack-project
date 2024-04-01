@@ -31,6 +31,8 @@ const Messages = () => {
     }
   }, [messages]);
 
+  console.log(messages);
+
   return (
     <GridItem as={Box} bg="white" overflowY="auto">
       <Box display="flex" flexDirection="column" height="100%">

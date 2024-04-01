@@ -60,6 +60,7 @@ export const createMessageDB = async (
   } catch (error) {
     console.error("Error creating message:", error);
   }
+  
 };
 
 export const deleteMessageDB = async (messageId) => {
