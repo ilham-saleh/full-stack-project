@@ -64,7 +64,7 @@ const Community = () => {
 
   return (
     <>
-      <main className="bg-[#f9fafe] sm:p-8 px-4 py-8 w-full min-h-[100vh]">
+      <main className="bg-[#f9fafe] sm:p-8 px-4 py-8 w-full min-h-[100vh] sm:w-full">
         <section className="max-w--7xl max-auto">
           <div>
             <h1 className="font-extrabold text-[#222328] text-[30px]">
