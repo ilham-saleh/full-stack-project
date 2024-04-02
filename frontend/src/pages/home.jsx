@@ -49,12 +49,10 @@ const Home = () => {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    console.log(form);
   };
 
   const handleSurpriseMe = () => {
     const randomPrompt = getRandomPrompt(form.prompt);
-    console.log(randomPrompt);
 
     setForm({ ...form, prompt: randomPrompt });
   };
@@ -77,7 +75,6 @@ const Home = () => {
           "http://localhost:3030/post/create",
           options
         );
-        console.log(form);
 
         const result = await response.json();
         console.log(result.data);

@@ -64,7 +64,6 @@ const SignUpPage = () => {
       );
       const result = await response.json();
       if (response.ok) {
-        console.log(result);
         localStorage.removeItem("userSignUp");
         navigate("/login");
       } else {

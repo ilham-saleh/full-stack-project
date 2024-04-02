@@ -1,6 +1,3 @@
-import logo from "../assets/logo.svg";
-import { Link } from "react-router-dom";
-
 import { Card, Loader, FormField } from "../components/home/index";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";

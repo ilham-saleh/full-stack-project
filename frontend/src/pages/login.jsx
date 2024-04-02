@@ -37,6 +37,7 @@ const LoginPage = () => {
 
       return newUserData;
     });
+    // localStorage.setItem("user", JSON.stringify(loginData));
   };
 
   const handleLogin = async (e) => {
@@ -50,11 +51,10 @@ const LoginPage = () => {
     const response = await fetch(`${URL}/user/login`, option);
     const result = await response.json();
     if (response.ok) {
-      console.log(result.token);
       localStorage.setItem("user", JSON.stringify(result.data));
       localStorage.setItem("token", result.token);
       setAuthUser(result.data);
-      navigate("/");
+      navigate("/"); 
     } else {
       toast(result.error);
     }
