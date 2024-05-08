@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import Messages from "./pages/Messages";
-import LoginPage from "./pages/Login";
-import SignUpPage from "./pages/Signup";
-import { useAuthContext } from "./context/AuthContext";
+import Messages from "./pages/Messages.jsx";
+import LoginPage from "./pages/Login.jsx";
+import SignUpPage from "./pages/Signup.jsx";
+import { useAuthContext } from "./context/AuthContext.jsx";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/protectedRoute";
 import Home from "./pages/Home";
